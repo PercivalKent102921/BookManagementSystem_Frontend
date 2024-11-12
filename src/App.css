@@ -1,38 +1,109 @@
-.App {
+/* Apply a vibrant gradient background to the whole page */
+body {
+  background: linear-gradient(to right, #000000, #f1c40f, #dcdcdc); /* Black to Yellow to Light Gray */
+  min-height: 100vh;
+  margin: 0; /* To remove any default margin */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Container styling for the pages */
+.container {
+  background-color: #333333; /* Dark background for the container */
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Form background and other styles */
+form.bg-dark {
+  background-color: #2c2c2c; /* Dark background for the form */
+  border-radius: 8px;
+  padding: 20px;
+}
+
+/* Title for pages */
+h2.text-center.text-warning.mb-4 {
+  color: #f1c40f !important; /* Bright Yellow */
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Text Color Classes */
+.text-warning {
+  color: #f1c40f !important; /* Bright Yellow */
+}
+
+.text-light {
+  color: #dcdcdc !important; /* Light Gray for input fields */
+}
+
+/* Form labels and inputs */
+.form-group label {
+  color: #dcdcdc; /* Light gray text */
+}
+
+.form-control {
+  background-color: #333333; /* Dark input background */
+  color: #dcdcdc; /* Light text */
+  border: 1px solid #f1c40f; /* Yellow border */
+  border-radius: 5px;
+}
+
+/* Button Styling */
+.btn-warning {
+  background-color: #f1c40f; /* Bright Yellow */
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.btn-danger {
+  background-color: #e74c3c; /* Red for delete */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.btn-info {
+  background-color: #3498db; /* Blue for view */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+/* Ensure the Add New Book button has a margin and is centered */
+.add-book-button {
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Book List Styling */
+.book-list {
+  background-color: #000000; /* Black background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Book List Title */
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000000; /* Black text */
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Make sure the body padding and layout of all pages are consistent */
+html, body {
+  height: 100%;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
