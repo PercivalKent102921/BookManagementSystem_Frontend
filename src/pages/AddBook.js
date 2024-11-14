@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App.css'; // Corrected path to App.css
 
 const AddBook = ({ onAdd }) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
-    const [publishedYear, setPublishedYear] = useState(''); // Keep as string to handle input field
+    const [publishedYear, setPublishedYear] = useState('');
     const [genre, setGenre] = useState('');
     const [description, setDescription] = useState('');
     const [loading, setLoading] = useState(false);
@@ -15,17 +16,15 @@ const AddBook = ({ onAdd }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validate fields before submitting
         if (!title || !author || !publishedYear || !genre || !description) {
             setError('All fields are required.');
             return;
         }
 
-        // Convert publishedYear to integer
         const newBook = { 
             title, 
             author, 
-            published_year: parseInt(publishedYear, 10), // Convert to integer
+            published_year: parseInt(publishedYear, 10),
             genre, 
             description, 
             id: Date.now() 
@@ -48,11 +47,7 @@ const AddBook = ({ onAdd }) => {
             }
 
             const data = await response.json();
-            
-            // Use the onAdd function to update the parent component's state
-            onAdd(data);
-
-            // Redirect to home page after successfully adding
+            onAdd(data); 
             navigate('/');
         } catch (error) {
             setError(error.message);
@@ -61,13 +56,17 @@ const AddBook = ({ onAdd }) => {
         }
     };
 
+    const handleBackClick = () => {
+        navigate('/'); // Navigate back to home
+    };
+
     return (
         <div className="container my-5">
-            <h2 className="text-center text-warning mb-4">Add New Book</h2>
+            <h2 className="text-light mb-4">Add New Book</h2>
 
             {error && <div className="alert alert-danger">{error}</div>}
 
-            <form onSubmit={handleSubmit} className="bg-dark p-4 rounded shadow-lg">
+            <form onSubmit={handleSubmit} className="form-container p-4 rounded shadow-lg">
                 <div className="form-group">
                     <label htmlFor="title" className="text-light">Title</label>
                     <input
@@ -99,8 +98,8 @@ const AddBook = ({ onAdd }) => {
                         onChange={(e) => setPublishedYear(e.target.value)}
                         required
                         className="form-control"
-                        min="1500" // Optional: set a minimum year
-                        max={new Date().getFullYear()} // Optional: set a maximum year to current year
+                        min="1000" 
+                        max="9999" 
                     />
                 </div>
                 <div className="form-group">
@@ -131,6 +130,13 @@ const AddBook = ({ onAdd }) => {
                     disabled={loading}
                 >
                     {loading ? 'Adding...' : 'Add Book'}
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-secondary btn-block mt-3"
+                    onClick={handleBackClick}
+                >
+                    Back
                 </button>
             </form>
         </div>

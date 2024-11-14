@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './App.css'; // Assuming you have the custom styles in App.css
 
 const BookList = () => {
     const [books, setBooks] = useState([]); // State to store the list of books
@@ -48,24 +49,39 @@ const BookList = () => {
     };
 
     return (
-        <div className="book-list">
-            {books.map((book) => (
-                <div key={book.id} className="book-item">
-                    <h3>{book.title}</h3>
-                    <p>{book.author}</p>
-                    <div className="book-actions">
-                        <Link to={`/view/${book.id}`} className="btn-view">
-                            View
-                        </Link>
-                        <Link to={`/edit/${book.id}`} className="btn-edit">
-                            Edit
-                        </Link>
-                        <button onClick={() => handleDelete(book.id)} className="btn-delete">
-                            Delete
-                        </button>
+        <div className="container mt-5">
+            <h2 className="text-center text-white mb-4">Book List</h2>
+            <div className="row">
+                {books.map((book) => (
+                    <div key={book.id} className="col-md-4 mb-4">
+                        <div className="card shadow-sm">
+                            <img
+                                src="https://via.placeholder.com/150"
+                                className="card-img-top"
+                                alt="book cover"
+                            />
+                            <div className="card-body">
+                                <h5 className="card-title">{book.title}</h5>
+                                <p className="card-text">{book.author}</p>
+                                <div className="d-flex justify-content-between">
+                                    <Link to={`/view/${book.id}`} className="btn btn-info btn-sm">
+                                        View
+                                    </Link>
+                                    <Link to={`/edit/${book.id}`} className="btn btn-warning btn-sm">
+                                        Edit
+                                    </Link>
+                                    <button
+                                        onClick={() => handleDelete(book.id)}
+                                        className="btn btn-danger btn-sm"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 };

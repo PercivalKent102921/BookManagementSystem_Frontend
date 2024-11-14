@@ -5,12 +5,12 @@ import AddBook from './pages/AddBook';
 import EditBook from './pages/EditBook';
 import ViewBook from './pages/ViewBook';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
 
-  // Function to fetch books from the backend
   const fetchBooks = async () => {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/books');
@@ -25,26 +25,29 @@ const App = () => {
     }
   };
 
-  // Fetch books when the component mounts
   useEffect(() => {
     fetchBooks();
   }, []);
 
   const handleAddBook = async (bookData) => {
     try {
-      // Add book to the backend
+      // Check if the book already exists
+      const bookExists = books.some(book => book.id === bookData.id); // Assuming 'id' is a unique identifier
+
+      if (bookExists) {
+        console.error('This book already exists');
+        return; // Exit the function if the book already exists
+      }
+
       const response = await fetch('http://127.0.0.1:8000/api/books', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(bookData),
       });
 
       if (response.ok) {
         const newBook = await response.json();
-        const updatedBooks = [...books, newBook];
-        setBooks(updatedBooks);
+        setBooks((prevBooks) => [...prevBooks, newBook]);
         navigate('/');
       } else {
         console.error('Failed to add book');
@@ -56,20 +59,16 @@ const App = () => {
 
   const handleUpdateBook = async (id, updatedData) => {
     try {
-      // Update book in the backend
       const response = await fetch(`http://127.0.0.1:8000/api/books/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData),
       });
 
       if (response.ok) {
-        const updatedBooks = books.map((book) =>
-          book.id === parseInt(id) ? updatedData : book
+        setBooks((prevBooks) =>
+          prevBooks.map((book) => (book.id === parseInt(id) ? updatedData : book))
         );
-        setBooks(updatedBooks);
         navigate('/');
       } else {
         console.error('Failed to update book');
@@ -80,12 +79,19 @@ const App = () => {
   };
 
   return (
-    <Routes>
-      <Route path="/" element={<Home books={books} setBooks={setBooks} fetchBooks={fetchBooks} />} />
-      <Route path="/add" element={<AddBook onAdd={handleAddBook} />} />
-      <Route path="/edit/:id" element={<EditBook books={books} onUpdate={handleUpdateBook} />} />
-      <Route path="/view/:id" element={<ViewBook books={books} />} />
-    </Routes>
+    <div className="app-container">
+      <header className="app-header">
+        <h1 className="text-center text-white py-4">Book Management System</h1>
+      </header>
+      <div className="app-content">
+        <Routes>
+          <Route path="/" element={<Home books={books} setBooks={setBooks} fetchBooks={fetchBooks} />} />
+          <Route path="/add" element={<AddBook onAdd={handleAddBook} />} />
+          <Route path="/edit/:id" element={<EditBook books={books} onUpdate={handleUpdateBook} />} />
+          <Route path="/view/:id" element={<ViewBook books={books} />} />
+        </Routes>
+      </div>
+    </div>
   );
 };
 

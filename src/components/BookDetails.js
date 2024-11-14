@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import './App.css'; // Assuming your custom CSS for styles
 
 const BookDetails = () => {
     const { id } = useParams(); // Get the book ID from the URL
@@ -28,22 +30,36 @@ const BookDetails = () => {
     }, [id]); // The effect depends on the book ID
 
     if (loading) {
-        return <p>Loading...</p>; // Show loading message while fetching
+        return <div className="text-center text-white">Loading...</div>; // Show loading message
     }
 
     if (error) {
-        return <p>Error: {error}</p>; // Show error message if fetch fails
+        return <div className="text-center text-danger">Error: {error}</div>; // Show error message if fetch fails
     }
 
     return book ? (
-        <div>
-            <h2>{book.title}</h2>
-            <p><strong>Author:</strong> {book.author}</p>
-            <p><strong>Genre:</strong> {book.genre}</p>
-            <p><strong>Description:</strong> {book.description}</p>
+        <div className="container-fluid">
+            <div className="row justify-content-center">
+                <div className="col-md-8 col-lg-6 mt-5">
+                    <div className="card bg-dark text-white shadow-lg rounded">
+                        <div className="card-body">
+                            <h2 className="card-title text-center fade-in">{book.title}</h2>
+                            <p className="card-text">
+                                <strong>Author:</strong> {book.author}
+                            </p>
+                            <p className="card-text">
+                                <strong>Genre:</strong> {book.genre}
+                            </p>
+                            <p className="card-text">
+                                <strong>Description:</strong> {book.description}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     ) : (
-        <p>Book not found</p> // Show if the book is not found in the database
+        <div className="text-center text-white">Book not found</div> // Show if the book is not found
     );
 };
 

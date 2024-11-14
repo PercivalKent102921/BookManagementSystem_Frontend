@@ -1,109 +1,136 @@
-/* Apply a vibrant gradient background to the whole page */
+/* Global Styles */
 body {
-  background: linear-gradient(to right, #000000, #f1c40f, #dcdcdc); /* Black to Yellow to Light Gray */
-  min-height: 100vh;
-  margin: 0; /* To remove any default margin */
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-family: Arial, sans-serif;
+  background-image: url('Library.png'); /* Background image for the library */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  color: #f5f5dc; /* Soft cream color for text */
+  font-family: 'Georgia', serif; /* Classic serif font for a vintage feel */
 }
 
-/* Container styling for the pages */
+/* Container Styles */
 .container {
-  background-color: #333333; /* Dark background for the container */
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Form background and other styles */
-form.bg-dark {
-  background-color: #2c2c2c; /* Dark background for the form */
-  border-radius: 8px;
+  background-color: rgba(40, 41, 61, 0.85); /* Dark overlay for containers */
   padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Title for pages */
-h2.text-center.text-warning.mb-4 {
-  color: #f1c40f !important; /* Bright Yellow */
-  font-size: 2rem;
+/* Typography Styles */
+h1, h2, h5, p {
+  font-family: 'Times New Roman', serif; /* Old-fashioned font for headings and paragraphs */
+}
+
+h1.page-title {
+  color: #d3a15c; /* Warm gold color for the main title */
   font-weight: bold;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
-/* Text Color Classes */
-.text-warning {
-  color: #f1c40f !important; /* Bright Yellow */
+h2 {
+  color: #34495e; /* Dark color for secondary headings */
+  font-weight: 600;
 }
 
-.text-light {
-  color: #dcdcdc !important; /* Light Gray for input fields */
+/* Table Styles */
+table {
+  font-family: 'Georgia', serif; /* Font for table content */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hover effects */
 }
 
-/* Form labels and inputs */
-.form-group label {
-  color: #dcdcdc; /* Light gray text */
+.table-striped tbody tr:hover {
+  transform: scale(1.02); /* Slightly enlarge row on hover */
+  background-color: #e6f7ff; /* Light blue background on hover */
 }
 
-.form-control {
-  background-color: #333333; /* Dark input background */
-  color: #dcdcdc; /* Light text */
-  border: 1px solid #f1c40f; /* Yellow border */
+/* Button Styles */
+.btn {
+  transition: background-color 0.2s, transform 0.2s; /* Smooth transition for buttons */
   border-radius: 5px;
+  font-family: 'Times New Roman', serif; /* Vintage look for buttons */
+  font-weight: 600;
 }
 
-/* Button Styling */
+.btn:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Specific Button Variants */
+.btn-dark {
+  background-color: #8e735b; /* Muted brown for a classic feel */
+  color: #f5f5dc; /* Cream text */
+}
+
 .btn-warning {
-  background-color: #f1c40f; /* Bright Yellow */
-  color: #000000;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
+  background-color: #a68a64; /* Aged parchment color for warning buttons */
+  color: #3e2a47;
 }
 
-.btn-danger {
-  background-color: #e74c3c; /* Red for delete */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
+.btn-warning:hover {
+  background-color: #b19e7b; /* Lighter shade on hover */
 }
 
-.btn-info {
-  background-color: #3498db; /* Blue for view */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
+/* Input Styles */
+.form-control {
   border-radius: 5px;
+  font-family: 'Georgia', serif; /* Consistent font for inputs */
+  background-color: #f5f5dc; /* Soft cream background for inputs */
+  color: #3e2a47; /* Dark text for readability */
+  border: 1px solid #d3a15c; /* Gold outline for inputs */
+  padding: 10px;
 }
 
-/* Ensure the Add New Book button has a margin and is centered */
+/* Animation Styles */
+.fade-in {
+  animation: fadeIn 1s ease-in; /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Center the Add New Book button */
 .add-book-button {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Book List Styling */
-.book-list {
-  background-color: #000000; /* Black background */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Book List Title */
-.page-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #000000; /* Black text */
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
-/* Make sure the body padding and layout of all pages are consistent */
-html, body {
-  height: 100%;
+/* Custom Button Colors */
+.btn-view {
+  background-color: #28a745; /* Green for view button */
+  color: white;
 }
 
+.btn-edit {
+  background-color: #ffc107; /* Yellow for edit button */
+  color: black;
+}
+
+.btn-delete {
+  background-color: #dc3545; /* Red for delete button */
+  color: white;
+}
+
+/* Card Styles */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content within card */
+}
+
+.card-title,
+.card-text {
+  text-align: center; /* Center align text in cards */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 20px; /* Space between cards on smaller screens */
+  }
+}

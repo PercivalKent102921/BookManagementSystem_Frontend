@@ -1,27 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = ({ books = [], setBooks }) => {
-  // Function to fetch books from backend
-  const fetchBooks = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/books');
-      if (response.ok) {
-        const data = await response.json();
-        setBooks(data);
-      } else {
-        console.error('Failed to fetch books');
-      }
-    } catch (error) {
-      console.error('Error fetching books:', error);
-    }
-  };
-
-  // Fetch books when component mounts
-  useEffect(() => {
-    fetchBooks();
-  }, []);
-
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this book?')) {
       try {
@@ -31,9 +11,8 @@ const Home = ({ books = [], setBooks }) => {
             'Content-Type': 'application/json',
           },
         });
-  
+
         if (response.ok) {
-          // Remove the deleted book from the state directly
           setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
           alert('Book deleted successfully!');
         } else {
@@ -46,7 +25,7 @@ const Home = ({ books = [], setBooks }) => {
       }
     }
   };
-  
+
   return (
     <div className="container-fluid home-container">
       <h1 className="page-title">Book List</h1>
@@ -58,23 +37,25 @@ const Home = ({ books = [], setBooks }) => {
       {books.length === 0 ? (
         <p className="text-center text-danger">No books available. Please add some books.</p>
       ) : (
-        <div className="book-list">
+        <div className="row">
           {books.map((book) => (
-            <div key={book.id} className="card mb-3">
-              <div className="card-body">
-                <h5 className="card-title text-center text-warning">{book.title}</h5>
-                <p className="card-text text-center text-muted">{book.author}</p>
-                <p className="card-text text-white">{book.description}</p>
-                <div className="text-center">
-                  <Link to={`/view/${book.id}`} className="btn btn-warning mx-2 text-black">
-                    View
-                  </Link>
-                  <Link to={`/edit/${book.id}`} className="btn btn-warning mx-2 text-black">
-                    Edit
-                  </Link>
-                  <button onClick={() => handleDelete(book.id)} className="btn btn-danger mx-2">
-                    Delete
-                  </button>
+            <div key={book.id} className="col-md-4 mb-3">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title text-warning">{book.title}</h5>
+                  <p className="card-text text-muted">Author: {book.author}</p>
+                  <p className="card-text text-white">{book.description}</p>
+                  <div className="text-center">
+                    <Link to={`/view/${book.id}`} className="btn btn-view mx-2">
+                      View
+                    </Link>
+                    <Link to={`/edit/${book.id}`} className="btn btn-edit mx-2">
+                      Edit
+                    </Link>
+                    <button onClick={() => handleDelete(book.id)} className="btn btn-delete mx-2">
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
